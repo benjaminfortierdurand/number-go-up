@@ -8,6 +8,21 @@ body{
   color:#fafafa;
 }
 
+/* ---------- Light Theme ---------- */
+body.light{
+  background:#ffffff;
+  color:#111;
+}
+
+/* ---------- Ajustement thème clair ---------- */
+body.light #achievements li{
+  color:#fafafa;          /* texte blanc */
+  background:#444;        /* fond un peu plus clair que #222 */
+}
+body.light #achievements li.done{
+  background:#007a2f;     /* version verte lisible sur fond clair */
+}
+
 main{
   max-width:450px;
   margin:auto;
@@ -33,17 +48,9 @@ button{
 }
 button:active{transform:scale(.96)}
 
-#clicker{
-  background:#00d26a;
-  color:#000;
-  font-weight:700;
-}
-
-#prestige{
-  background:#ffb703;
-  color:#000;
-  font-weight:700;
-}
+#clicker{background:#00d26a;color:#000;font-weight:700}
+#prestige{background:#ffb703;color:#000;font-weight:700}
+.danger{background:#c1121f;color:#fff}
 
 /* Shop buttons inherit default styles */
 #shop button{background:#222;color:#fafafa;font-size:1rem;padding:.8rem 1rem}
@@ -67,22 +74,58 @@ button:active{transform:scale(.96)}
 #achievements li.done{background:#006d32;text-decoration:line-through}
 
 /* ---------- Animations ---------- */
-@keyframes flash{
-  0%,100%{filter:brightness(1)}
-  50%    {filter:brightness(2)}
-}
+@keyframes flash{0%,100%{filter:brightness(1)}50%{filter:brightness(2)}}
 .flash{animation:flash .25s ease}
-
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%    {transform:translateX(-3px)}
-  75%    {transform:translateX( 3px)}
-}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
 .shake{animation:shake .3s}
+
+/* ---------- Toast notification ---------- */
+.toast{
+  position:fixed;
+  bottom:1rem;
+  left:50%;
+  transform:translate(-50%,20px);
+  padding:.8rem 1.2rem;
+  border-radius:8px;
+  font-weight:700;
+  box-shadow:0 2px 6px rgba(0,0,0,.4);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s, transform .3s;
+}
+.toast-success{background:#00d26a;color:#000}
+.toast-prestige{background:#ffb703;color:#000}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- Prestige progress bar ---------- */
+#prestige-container{background:#333;border-radius:6px;height:18px;width:100%;overflow:hidden}
+#prestige-fill{background:#ffb703;width:0%;height:100%;transition:width .3s ease}
 
 /* ---------- Responsive tweaks ---------- */
 @media(min-width:600px){
   h1{font-size:4rem}
   button{font-size:1.3rem}
   #shop button{font-size:1rem}
+}              /*  ←  ACCOLADE QUI FERME le @media */
+
+/* ---------- Pulse animation for Prestige button ---------- */
+@keyframes pulse{
+  0%,100%{transform:scale(1)}
+  50%     {transform:scale(1.08)}
 }
+.pulse{animation:pulse .8s ease 3}
+
+/* ---------- Pop (+1) animation ---------- */
+@keyframes popUp {
+  0%   {transform:translateY(0) scale(1); opacity:1}
+  80%  {transform:translateY(-40px) scale(1.1); opacity:1}
+  100% {transform:translateY(-60px) scale(0.9); opacity:0}
+}
+.pop {
+  position:fixed;
+  font-weight:700;
+  pointer-events:none;
+  animation:popUp .6s ease forwards;
+  color:#ffb703;             /* jaune pour bien ressortir */
+}
+body.light .pop {color:#d87d00;}  /* ton plus foncé en thème clair */

@@ -1,0 +1,6 @@
+﻿body{font-family:system-ui;text-align:center;margin:0;padding:1rem;background:#111;color:#fafafa}
+main{max-width:450px;margin:auto;display:flex;flex-direction:column;gap:.8rem}
+button{padding:1rem 1.4rem;font-size:1.2rem;border:0;border-radius:8px;cursor:pointer}
+#clicker{background:#00d26a;color:#000;font-weight:700}
+#prestige{background:#ffb703;color:#000}
+@media(min-width:600px){h1{font-size:4rem}}
